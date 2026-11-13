@@ -1,0 +1,13 @@
+# Java build outputs
+emulator-src/out/
+emulator-src/stubout/
+emulator-src/jarroot/
+emulator-src/test-out/
+emulator-src/stubs.txt
+emulator-src/srcs.txt
+emulator-src/manifest.txt
+# Local runtime data/logs
+*.log
+tabs.txt
+tab_proxies.txt
+Che779V2.xml
