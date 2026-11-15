@@ -1,4 +1,4 @@
-# Che779 EmulatorV2 1.2.0 - build script (PowerShell)
+# Che779 EmulatorV2 1.3.0 - build script (PowerShell)
 # Yeu cau: JDK 8+ (javac, jar). Chay:
 # powershell -ExecutionPolicy Bypass -File build_emulatorV2.ps1
 
@@ -123,7 +123,7 @@ try {
         'Main-Class: com.che779.emu.Che779Main'
         'Class-Path: lib/jna.jar'
         'Implementation-Title: Che779 EmulatorV2'
-        'Implementation-Version: 1.2.0'
+        'Implementation-Version: 1.3.0'
         'Created-By: Che779 Team'
         ''
     ) -join "`r`n"

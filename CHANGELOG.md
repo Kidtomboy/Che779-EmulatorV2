@@ -2,7 +2,9 @@
 
 Chỉ ghi những gì **phiên bản hiện tại** đang làm được. Lịch sử các bản trước không còn được lưu ở đây.
 
-## [1.2.0] — Bản phát hành
+## [1.3.0] — Bản phát hành (chỉ Windows)
+
+> Từ 1.3.0 repo này chỉ dành cho Windows. Bản Linux nằm ở Che779-Linux.
 
 ### Che779 Emulator V2
 - Nhiều tab trong **một cửa sổ, một tiến trình Java**; mở sẵn 12 tab ở lần chạy đầu. Chủ dự án xác nhận chạy tốt với đủ 12 tab trên Windows.
@@ -18,4 +20,4 @@ Chỉ ghi những gì **phiên bản hiện tại** đang làm được. Lịch 
 
 ### Phát hành và build
 - Mỗi lần gắn thẻ `vX.Y.Z`, GitHub tự build, chạy kiểm thử và tạo `Che779-EmulatorV2-<phiên bản>.zip` cùng `SHA256SUMS.txt`.
-- Script build đủ cho Linux (`build.sh`) và Windows (`.cmd`, `.ps1`); không cần `unzip`.
+- Script build Windows (`.cmd`, `.ps1`); không cần `unzip`. Gắn thẻ `vX.Y.Z` → Actions build trên Windows, đóng zip và tạo `SHA256SUMS.txt` (mã băm tính sau cùng trên đúng file zip).

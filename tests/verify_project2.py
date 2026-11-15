@@ -11,7 +11,7 @@ required = [
     "docs/README.md", "docs/AI_HANDOFF.md", "docs/ARCHITECTURE.md", "docs/BUILD_AND_RUN.md",
     "docs/DEBUG_LOG.md", "docs/DECISIONS.md", "docs/IPC_PROTOCOL.md", "docs/PROJECT_STATE.md",
     "docs/ROADMAP.md", "docs/SOURCE_INVENTORY.md", "docs/TESTING.md", "docs/VARIANTS_AND_CLONES.md",
-    f"{SRC}/build.sh", f"{SRC}/build_emulatorV2.cmd", f"{SRC}/build_emulatorV2.ps1",
+    ".github/scripts/build-emulator-v2.sh", f"{SRC}/build_emulatorV2.cmd", f"{SRC}/build_emulatorV2.ps1",
     f"{SRC}/src/com/che779/emu/IpcServer.java",
     f"{SRC}/test/com/che779/emu/IpcServerParserTest.java",
     ".github/workflows/ci.yml", ".github/workflows/release.yml",
