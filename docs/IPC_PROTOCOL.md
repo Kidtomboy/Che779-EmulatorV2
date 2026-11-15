@@ -1,33 +1,30 @@
-# IPC Protocol
+# Giao thức IPC
 
-## Transport
+## Kết nối
 
-- TCP loopback only: `127.0.0.1`.
-- Default base port: 7790; if occupied, server tries the next 199 ports.
-- UTF-8 JSON Lines: one flat JSON object per line, one JSON response per command.
-- Maximum line length: 65,536 Java characters.
-- Maximum active clients: 16; excess accepted sockets are closed.
-- Per-socket read timeout: 10 seconds of inactivity.
+- TCP loopback, chỉ `127.0.0.1`. Cổng mặc định **7790**; nếu bận, thử 199 cổng kế tiếp.
+- JSON một dòng, mã hóa UTF-8: mỗi dòng một đối tượng JSON phẳng, mỗi lệnh nhận lại một dòng JSON.
+- Tối đa 65.536 ký tự mỗi dòng; tối đa 16 kết nối cùng lúc (kết nối thừa bị đóng); ngắt nếu 10 giây không có dữ liệu.
 
-## Supported shape
+## Dạng lệnh
 
-The parser accepts a JSON object whose values are strings, numbers, booleans or null. Nested objects/arrays are intentionally unsupported. Duplicate keys, malformed escapes, trailing content and invalid primitive values are rejected.
-
-Example:
+Giá trị chỉ có thể là chuỗi, số, boolean hoặc null. Đối tượng/mảng lồng nhau **không** được hỗ trợ; khóa trùng, escape sai, dữ liệu thừa phía sau bị từ chối.
 
 ```json
 {"action":"ping"}
 {"action":"open","tab":1,"path":"/games/demo.jar"}
 ```
 
-## Actions
+## Các lệnh
 
-Existing action names are retained: `ping`, `status`, `version`, `slots`, `keypress`, `keydown`, `keyup`, `text`, `clean_ram`, `sleep`, `hide`, `show`, `mouse`, `proxy`, `proxy_get`, `add_tab`, `open`, `screenshot`, `quit`/`close`.
+`ping`, `status`, `version`, `slots`, `keypress`, `keydown`, `keyup`, `text`, `clean_ram`, `sleep`, `hide`, `show`, `mouse`, `proxy`, `proxy_get`, `add_tab`, `open`, `screenshot`, `quit` / `close`.
 
-## Response semantics
+Các lệnh phím, chuột, ngủ, dọn RAM gửi tới **mọi tab đang chạy**. `add_tab` thêm tab; `open` (kèm `tab`, `path`) nạp game vào tab; `slots` liệt kê tab.
 
-Most actions return `{"ok":true}` or `{"ok":false,...}`. For `open` and `add_tab`, success currently means the UI operation was accepted/enqueued, not that the game JAR finished loading. Consumers must inspect `slots`/UI/logs for final game state.
+## Ý nghĩa phản hồi
 
-## Security
+Hầu hết lệnh trả `{"ok":true}` hoặc `{"ok":false,...}`. Với `open` và `add_tab`, `ok:true` nghĩa là yêu cầu đã được nhận và xếp hàng, **chưa** có nghĩa game đã nạp xong; hãy kiểm tra lại bằng `slots` hoặc giao diện.
 
-Loopback binding prevents remote network access by default, but does not authenticate local processes. Do not expose this port through a public tunnel or bind to `0.0.0.0`. Authentication remains a backlog item.
+## Bảo mật
+
+Chỉ bind loopback nên không truy cập được từ mạng, nhưng **không xác thực** tiến trình trên cùng máy. Không đưa cổng này ra công cộng và không bind `0.0.0.0`. Xem [`SECURITY.md`](../SECURITY.md).

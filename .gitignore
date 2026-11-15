@@ -1,13 +1,19 @@
-# Java build outputs
-emulator-src/out/
-emulator-src/stubout/
-emulator-src/jarroot/
-emulator-src/test-out/
-emulator-src/stubs.txt
-emulator-src/srcs.txt
-emulator-src/manifest.txt
-# Local runtime data/logs
+# Kết quả build Java
+apps/emulator-v2/source/out/
+apps/emulator-v2/source/stubout/
+apps/emulator-v2/source/jarroot/
+apps/emulator-v2/source/asmx/
+apps/emulator-v2/source/test-out/
+apps/emulator-v2/source/stubs.txt
+apps/emulator-v2/source/srcs.txt
+apps/emulator-v2/source/manifest.txt
+apps/emulator-v2/source/Che779_EmulatorV2.jar
+artifacts/
+
+# Dữ liệu và log chạy thử trên máy
 *.log
 tabs.txt
 tab_proxies.txt
 Che779V2.xml
+__pycache__/
+*.pyc

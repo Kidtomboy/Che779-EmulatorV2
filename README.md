@@ -1,19 +1,42 @@
 <div align="center">
 
-# 🖥️ Che779 Emulator V2
+# 🗂️ Che779 Emulator V2
 
 **Giả lập J2ME nhiều tab trong một cửa sổ — một tiến trình Java, không cần chương trình điều khiển riêng.**
 
 Dựa trên MicroEmulator 3.0.0, thêm lớp Che779: tab, lưới, proxy theo tab, đồng bộ thao tác và dọn RAM.
+Mở lên là dùng, chạy được trên Windows, Linux và mọi máy có Java.
 
-[![Java 8+](https://img.shields.io/badge/Java-8%2B-ED8B00?logo=openjdk&logoColor=white)](#-chạy)
-[![Phiên bản](https://img.shields.io/badge/phiên%20bản-0.0.0.2%20custom-blue)](CHANGELOG.md)
+[![Phiên bản](https://img.shields.io/github/v/release/Kidtomboy/Che779-EmulatorV2?label=phi%C3%AAn%20b%E1%BA%A3n&color=blue)](../../releases/latest)
+[![Lượt tải](https://img.shields.io/github/downloads/Kidtomboy/Che779-EmulatorV2/total?label=l%C6%B0%E1%BB%A3t%20t%E1%BA%A3i&color=brightgreen)](../../releases)
+[![CI](https://img.shields.io/github/actions/workflow/status/Kidtomboy/Che779-EmulatorV2/ci.yml?branch=main&label=CI)](../../actions)
+[![Windows](https://img.shields.io/badge/Windows-0078D6?logo=windows&logoColor=white)](#-tải-về)
+[![Linux](https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black)](#-tải-về)
+[![Java 8+](https://img.shields.io/badge/Java-8%2B-ED8B00?logo=openjdk&logoColor=white)](#-yêu-cầu-hệ-thống)
 [![Giấy phép](https://img.shields.io/badge/giấy%20phép-Apache%202.0-orange)](LICENSE)
-[![Trạng thái](https://img.shields.io/badge/trạng%20thái-thử%20nghiệm-yellow)](#-trạng-thái-và-giới-hạn)
 
-[Tính năng](#-tính-năng) · [Chạy](#-chạy) · [Build](#-build-từ-mã-nguồn) · [IPC](#-ipc) · [Tài liệu](#-tài-liệu) · [Ghi công](#-ghi-công-và-giấy-phép)
+[Tải về](#-tải-về) · [Tính năng](#-tính-năng) · [Bắt đầu nhanh](#-bắt-đầu-nhanh) · [Hướng dẫn](#-hướng-dẫn-sử-dụng) · [Hỏi đáp](#-hỏi-đáp-và-xử-lý-lỗi) · [Build](#-build-từ-mã-nguồn) · [Tài liệu](#-tài-liệu) · [Ghi công](#-ghi-công-và-giấy-phép)
 
 </div>
+
+---
+
+## 📥 Tải về
+
+Vào mục **[Releases](../../releases/latest)** và tải file:
+
+| File | Bên trong có gì |
+|---|---|
+| `Che779-EmulatorV2-<phiên bản>.zip` | `Che779_EmulatorV2.jar` + `chay.cmd` (Windows) + `chay.sh` (Linux) + hướng dẫn ngắn |
+
+Giải nén ra một thư mục. Mỗi bản phát hành có kèm `SHA256SUMS.txt` để kiểm tra file tải về có nguyên vẹn không:
+
+```bash
+sha256sum -c SHA256SUMS.txt        # Linux
+Get-FileHash <file>.zip -Algorithm SHA256   # Windows PowerShell
+```
+
+> Chưa thấy file nào ở Releases? Bản phát hành được tạo tự động khi chủ dự án gắn thẻ phiên bản. Trong lúc đó bạn có thể [tự build](#-build-từ-mã-nguồn).
 
 ---
 
@@ -23,12 +46,12 @@ Che779 gồm 4 dự án, mỗi dự án một repo. Bạn đang xem **Project 2*
 
 | # | Dự án | Chạy trên | Dùng khi nào |
 |:-:|---|---|---|
-| 1 | [**Che779-Emulator**](https://github.com/Kidtomboy/Che779-Emulator) | Windows | Mỗi tab một cửa sổ, điều khiển bằng Remoter |
+| 1 | [**Che779-Emulator**](https://github.com/Kidtomboy/Che779-Emulator) | Windows, Linux | Mỗi tab một cửa sổ, điều khiển bằng Remoter |
 | 2 | **Che779-EmulatorV2** ← *bạn đang ở đây* | Windows / Java 8+ | Nhiều tab trong một cửa sổ, một tiến trình |
-| 3 | [**Che779-Linux**](https://github.com/Kidtomboy/Che779-Linux) | Linux và Termux | Gói chạy trên Linux và Android (Termux) |
+| 3 | [**Che779-Linux**](https://github.com/Kidtomboy/Che779-Linux) | Linux và Termux | Một lệnh cài và chạy trên Linux / Android (Termux) |
 | 4 | [**Che779-Android**](https://github.com/Kidtomboy/Che779-Android) | Android | Chạy trực tiếp trên điện thoại bằng APK |
 
-**V1 hay V2?** V1 cho mỗi game một tiến trình riêng nên cách ly tốt nhưng tốn RAM. V2 gom các tab vào một tiến trình nên nhẹ hơn và mở là dùng; đổi lại một lỗi nặng ở tầng Java có thể ảnh hưởng cả cửa sổ.
+**V1 hay V2?** Project 1 cho mỗi game một tiến trình riêng nên cách ly tốt nhưng tốn RAM. V2 gom các tab vào một tiến trình nên nhẹ hơn và mở là dùng; đổi lại một lỗi nặng ở tầng Java có thể ảnh hưởng cả cửa sổ.
 
 ---
 
@@ -36,97 +59,152 @@ Che779 gồm 4 dự án, mỗi dự án một repo. Bạn đang xem **Project 2*
 
 | | Tính năng | Mô tả |
 |:-:|---|---|
-| 🗂️ | **Nhiều tab, một cửa sổ** | Mỗi tab có thiết bị, RMS (dữ liệu lưu game), class loader và proxy riêng |
-| 🔲 | **Chế độ Tab / Lưới** | Mặc định mở sẵn 12 tab; kích thước màn hình tab từ 176×208 đến 360×640 |
-| 🛡️ | **Tab lỗi không kéo sập tab khác** | Có nút *Khởi động lại game* cho tab bị lỗi |
-| 🔁 | **Đồng bộ phím và chuột** | Chọn các tab tham gia, thao tác một tab được nhân ra các tab còn lại |
-| 🌐 | **Proxy theo tab** | Mỗi tab một proxy, hoặc chia vòng từ kho proxy; HTTP và SOCKS5 |
+| 🗂️ | **Nhiều tab, một cửa sổ** | Mỗi tab có thiết bị, RMS (dữ liệu lưu game), class loader và proxy riêng; mở sẵn 12 tab ở lần chạy đầu |
+| 🔲 | **Chế độ Tab / Lưới** | Xem từng tab hoặc tất cả cùng lúc; màn hình tab từ 176×208 đến 360×640; game tự thu phóng vừa ô |
+| 🛡️ | **Tab lỗi không kéo sập tab khác** | Có nút *Khởi động lại game* và *Xem log* cho tab bị lỗi |
+| 🔁 | **Đồng bộ phím và chuột** | Chọn các tab tham gia; thao tác (kể cả cuộn chuột) ở một tab được nhân ra các tab còn lại |
+| 🌐 | **Proxy theo tab** | Mỗi tab một proxy, hoặc chia vòng từ kho proxy; HTTP và SOCKS5; lưu và khôi phục khi mở lại |
 | 🔀 | **Thay IP máy chủ** | Ưu tiên `server.txt` trong jar game, rồi máy chủ chọn từ `servers.txt`, rồi tự nhập |
 | 🧹 | **Dọn RAM** | Dọn ngay hoặc tự dọn theo ngưỡng HEAP 60–90% |
 | 😴 | **Menu Che779** | Sleep, tự Sleep, giảm FPS, tốc độ game, giảm đồ họa, màu |
 | 📊 | **Thanh trạng thái** | CPU và HEAP của cả tiến trình, nút Resize |
-| 🔌 | **IPC** | Điều khiển từ chương trình khác qua TCP loopback |
+| 🔌 | **IPC** | Điều khiển từ chương trình khác qua TCP `127.0.0.1` |
 
 ---
 
-## ▶️ Chạy
+## 🖥️ Yêu cầu hệ thống
 
-Cần **Java 8 trở lên**.
-
-```bash
-java -jar Che779_EmulatorV2.jar
-```
-
-Mở sẵn game:
-
-```bash
-java -jar Che779_EmulatorV2.jar /duong/dan/game.jar
-```
-
-Không truyền game thì V2 mở lại các tab của lần trước (`tabs.txt`). Dữ liệu cấu hình, proxy và RMS nằm ngoài thư mục chương trình:
-
-| Hệ điều hành | Thư mục dữ liệu |
+| | Yêu cầu |
 |---|---|
-| Windows | `%APPDATA%\Che779\Che779-EmulatorV2` |
-| Linux | `~/.che779` |
+| Hệ điều hành | Windows, Linux hoặc bất kỳ hệ nào có Java và màn hình đồ họa |
+| Java | **Java 8 trở lên** |
+| RAM | Tùy số tab và game; tất cả tab dùng chung một JVM nên nhẹ hơn Project 1 |
 
-Thư viện JNA là **tùy chọn** (để dọn RAM sâu hơn trên Windows); không có thì V2 dùng PowerShell.
+Cài Java trên Debian/Ubuntu/Mint bằng gói chính thức: `sudo apt install default-jre`. Windows: tải từ [Adoptium](https://adoptium.net).
 
-> Muốn chạy trên Linux hoặc Termux với một lệnh duy nhất? Xem **[Che779-Linux](https://github.com/Kidtomboy/Che779-Linux)**.
+---
+
+## 🚀 Bắt đầu nhanh
+
+1. Tải `Che779-EmulatorV2-<phiên bản>.zip` và giải nén.
+2. **Windows:** bấm đúp `chay.cmd`. **Linux:** chạy `./chay.sh`.
+3. Dùng **Thêm Game** hoặc mở game vào tab trống để chọn file `.jar`; hoặc kéo file game thả lên `chay.cmd` để mở sẵn.
+
+Hoặc chạy trực tiếp: `java -jar Che779_EmulatorV2.jar [game1.jar game2.jar ...]`. Không truyền game thì V2 mở lại các tab của lần trước.
+
+---
+
+## 📖 Hướng dẫn sử dụng
+
+- **Ô tab:** mỗi ô có `Tab N: [tên game]`, ô **Sync** (tham gia đồng bộ), nút **P** (proxy riêng: Trực tiếp / Dùng chung / từng proxy / Quản lý danh sách) và nút **×** đóng game.
+- **Quản lý tab:** thêm game hoặc tab trống, đóng game, xóa tab, đóng tất cả, danh sách tab. Chuyển **Dạng Tab** hoặc **Dạng Lưới** ở menu hiển thị.
+- **Đồng bộ:** menu Đồng bộ cho bật/tắt tất cả, chọn tab tham gia. Các tab nên cùng kích thước để tọa độ chuột trùng nhau.
+- **Proxy:** vào **Che779 → Quản lý Proxy** để thêm, nhập, kiểm tra proxy; gán cho từng tab hoặc chia vòng. Áp dụng cho các kết nối mới.
+- **Kích thước màn hình tab:** menu Hiển thị (176×208 … 360×640), hoặc nút Resize ở thanh dưới.
+- **Bộ nhớ:** thanh dưới hiện CPU/HEAP; dọn RAM ngay hoặc đặt ngưỡng tự dọn.
+- **Khi game lỗi:** tab hiện "Game đã thoát" hoặc "Tab gặp sự cố" kèm nút **Xem log** và **Khởi động lại game**.
+
+---
+
+## ⚙️ Cấu hình và nơi lưu dữ liệu
+
+| | Windows | Linux |
+|---|---|---|
+| Thư mục dữ liệu | `%APPDATA%\Che779\Che779-EmulatorV2` | `~/.che779` |
+
+Bên trong: `Che779V2.xml` (cấu hình), `proxies.txt`, `servers.txt`, `tabs.txt`, `tab_proxies.txt`, RMS riêng từng tab và `Che779V2.log` (ghi lại mỗi lần chạy — gửi file này khi báo lỗi). Dữ liệu **không** ghi vào thư mục bạn giải nén, nên cập nhật bản mới không mất dữ liệu.
+
+Muốn Clean RAM sâu hơn trên Windows? Đặt `jna.jar` vào thư mục `lib/` cạnh jar (tùy chọn); không có thì dùng PowerShell.
+
+---
+
+## 🧩 Cách hoạt động
+
+```mermaid
+flowchart TD
+    J["☕ Một tiến trình Java<br/>Che779_EmulatorV2.jar"] --> W["🖼️ Cửa sổ chính<br/>Tab / Lưới · CPU · HEAP"]
+    W --> S1["Tab 1<br/>thiết bị · RMS · class loader · proxy"]
+    W --> S2["Tab 2<br/>thiết bị · RMS · class loader · proxy"]
+    W --> SN["Tab N …"]
+    J --> I["🔌 IPC · 127.0.0.1:7790"]
+```
+
+Mọi tab chạy trong cùng một JVM nhưng có ngữ cảnh riêng. Chi tiết: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+
+**IPC:** cổng chỉ mở trên `127.0.0.1` (mặc định từ **7790**, bận thì thử cổng kế tiếp), JSON một dòng, tối đa 16 kết nối, 64 KiB mỗi dòng, chờ đọc 10 giây. Các lệnh: `ping`, `status`, `version`, `slots`, `keypress`, `keydown`, `keyup`, `text`, `clean_ram`, `sleep`, `hide`, `show`, `mouse`, `proxy`, `proxy_get`, `add_tab`, `open`, `screenshot`, `quit`. Chi tiết: [`docs/IPC_PROTOCOL.md`](docs/IPC_PROTOCOL.md).
 
 ---
 
 ## 🔧 Build từ mã nguồn
 
+Cần JDK 8 trở lên (đã kiểm chứng với OpenJDK 21); không cần Maven, không cần `unzip`.
+
 | Hệ điều hành | Lệnh |
 |---|---|
-| Linux / macOS | `cd emulator-src && ./build.sh` |
-| Windows CMD | `emulator-src\build_emulatorV2.cmd` |
-| Windows PowerShell | `powershell -ExecutionPolicy Bypass -File emulator-src\build_emulatorV2.ps1` |
+| Linux / macOS | `cd apps/emulator-v2/source && ./build.sh` |
+| Windows CMD | `apps\emulator-v2\source\build_emulatorV2.cmd` |
+| Windows PowerShell | `powershell -ExecutionPolicy Bypass -File apps\emulator-v2\source\build_emulatorV2.ps1` |
 
-Mã được biên dịch cho Java 8 (`-source 8 -target 8`), chạy được với JDK 8 đến JDK mới. JDK mới có thể in cảnh báo bootstrap class path; đây không phải lỗi.
+Kết quả: `apps/emulator-v2/source/Che779_EmulatorV2.jar`. Kiểm thử: `bash tests/run-tests.sh` (build, test bộ đọc IPC, kiểm tra cấu trúc repo).
 
-Kiểm tra: `bash tests/run-tests.sh` — biên dịch emulator, chạy test bộ đọc IPC và kiểm tra cấu trúc repo.
+Chủ dự án phát hành bằng cách gắn thẻ `vX.Y.Z`: workflow **Phát hành** tự build, kiểm thử, đóng gói zip và tạo `SHA256SUMS.txt`.
 
-<details>
-<summary><b>Cấu trúc thư mục</b></summary>
+---
 
-| Đường dẫn | Nội dung |
+## ❓ Hỏi đáp và xử lý lỗi
+
+| Bạn gặp | Làm gì |
 |---|---|
-| `emulator-src/src/` | Mã nguồn Java |
-| `emulator-src/res/` | Tài nguyên giao diện và thiết bị |
-| `emulator-src/stubs/` | Stub JNA dùng khi biên dịch |
-| `emulator-src/lib/asm-3.2.jar` | Thư viện ASM |
-| `Che779_EmulatorV2.jar` | Bản build gần nhất, chạy được ngay |
-| `docs/` | Kiến trúc, giao thức, build, bảo mật, trạng thái, bàn giao |
-| `tests/` | Kiểm tra hồi quy và cấu trúc |
-| `.github/workflows/ci.yml` | CI trên Linux và Windows |
-
-</details>
+| Bấm `chay.cmd` mà không thấy gì | Kiểm tra đã cài Java 8+ (`java -version` trong cửa sổ lệnh). |
+| Build báo "jar đang được sử dụng" | Đóng Che779 EmulatorV2 đang chạy rồi build lại. |
+| Tab báo "Game đã thoát" / "Tab gặp sự cố" | Bấm **Xem log**, rồi **Khởi động lại game**. Gửi `Che779V2.log` khi báo lỗi. |
+| Game không vào được mạng | Thử đổi máy chủ ("Thay IP") hoặc đặt proxy cho tab trong menu **Che779**. Lỗi mạng còn có thể do chính máy chủ game. |
+| Đồng bộ chuột không trúng vị trí | Đặt các tab cùng một kích thước màn hình. |
+| Chạy trên máy chủ không có màn hình (Linux) | Dùng màn hình ảo: `xvfb-run -a ./chay.sh` (không thấy cửa sổ thật). |
+| Muốn báo lỗi | Mở [Issue](../../issues/new/choose), ghi phiên bản, hệ điều hành và Java. Xóa mật khẩu proxy khỏi log. |
 
 ---
 
-## 🔌 IPC
+## ⚠️ Giới hạn và vấn đề đã biết
 
-Cổng nghe chỉ trên `127.0.0.1`, mặc định từ **7790** (thử tối đa 200 cổng kế tiếp nếu bận). Giao thức là JSON một dòng, mỗi dòng một đối tượng phẳng. Giới hạn 16 kết nối, 64 KiB mỗi dòng, chờ đọc 10 giây. Chi tiết ở [`docs/IPC_PROTOCOL.md`](docs/IPC_PROTOCOL.md).
+- Tất cả tab dùng chung một JVM: lỗi nặng ở tầng Java có thể ảnh hưởng cả cửa sổ.
+- **Đóng tab chưa dọn hết luồng game** (vòng lặp mạng, Timer của game có thể vẫn chạy ngầm). Chưa tái hiện bằng chạy thật.
+- **IPC chưa có xác thực:** tiến trình khác trên cùng máy biết cổng thì gửi được lệnh. Không mở cổng này ra mạng. Xem [`SECURITY.md`](SECURITY.md).
+- Mật khẩu proxy được lưu dạng chữ thường.
+- Lệnh IPC `open` và `add_tab` trả kết quả khi yêu cầu được xếp hàng, chưa phải khi game đã nạp xong.
+- Một số game không mở được liên kết ngoài (`platformRequest` chỉ hiện thông báo).
+- Chưa kiểm thử chịu tải nhiều tab, chưa thử trực tiếp trên Android/Termux.
 
-> Chưa có xác thực: tiến trình khác trên cùng máy biết cổng thì có thể gửi lệnh. IPC không mở ra mạng LAN.
+Phần nào đã kiểm chứng, phần nào chưa: [`docs/TESTING.md`](docs/TESTING.md). Danh sách lỗi đầy đủ: [`docs/DEBUG_LOG.md`](docs/DEBUG_LOG.md).
 
 ---
 
-## 🧭 Trạng thái và giới hạn
+## 🗂️ Cấu trúc repo
 
-- Build và test hồi quy trên **Linux** đã chạy. Bản build **Windows** chỉ đáng tin khi workflow Windows chạy thật.
-- Jar V2 đã được mở thử trên Linux (màn hình ảo) và nạp được game thật; chưa thử hết bộ game của cộng đồng.
-- Chưa có kiểm thử chịu tải nhiều tab, kiểm thử mất điện giữa lúc ghi dữ liệu, hay kiểm thử Android/Termux trực tiếp.
-- Còn một số trạng thái toàn cục dùng chung giữa các tab và hàm xóa tab chưa dùng chung khóa với hàm nạp game; hai điểm này nằm trong danh sách việc cần làm tiếp.
-- Một vài game không mở được liên kết ngoài (`platformRequest` chỉ hiện thông báo).
+```
+Che779-EmulatorV2/
+├─ README.md  CONTRIBUTING.md  SECURITY.md  LICENSE  CHANGELOG.md  VERSION
+├─ THIRD_PARTY_NOTICES.md
+├─ apps/
+│  └─ emulator-v2/
+│     ├─ source/       Mã Java, tài nguyên, thư viện, script build (.sh .cmd .ps1)
+│     └─ prebuilt/     Jar dựng sẵn để tham chiếu
+├─ docs/               Tài liệu kỹ thuật (có mục lục)
+├─ tests/              Kiểm thử bộ đọc IPC và cấu trúc repo
+└─ .github/            Workflow CI + Phát hành, mẫu Issue và Pull Request
+```
 
 ---
 
 ## 📚 Tài liệu
 
-[Trạng thái dự án](docs/PROJECT_STATE.md) · [Build và kiểm thử](docs/BUILD_AND_TEST.md) · [IPC](docs/IPC_PROTOCOL.md) · [Bảo mật](docs/SECURITY.md) · [Kiểm kê nguồn](docs/SOURCE_INVENTORY.md) · [Bàn giao](docs/AI_HANDOFF.md) · [Third-party notices](THIRD_PARTY_NOTICES.md) · [Changelog](CHANGELOG.md)
+[Mục lục](docs/README.md) · [Trạng thái](docs/PROJECT_STATE.md) · [Kiến trúc](docs/ARCHITECTURE.md) · [IPC](docs/IPC_PROTOCOL.md) · [Build và chạy](docs/BUILD_AND_RUN.md) · [Kiểm thử](docs/TESTING.md) · [Lỗi đã biết](docs/DEBUG_LOG.md) · [Quyết định](docs/DECISIONS.md) · [Lộ trình](docs/ROADMAP.md) · [Fork và bản tự build](docs/VARIANTS_AND_CLONES.md) · [Nguồn gốc mã](docs/SOURCE_INVENTORY.md) · [Bàn giao](docs/AI_HANDOFF.md)
+
+---
+
+## 🤝 Đóng góp và bảo mật
+
+Muốn góp sức? Đọc [`CONTRIBUTING.md`](CONTRIBUTING.md). Tìm thấy lỗ hổng bảo mật? Xem [`SECURITY.md`](SECURITY.md) và báo riêng, đừng đăng công khai.
 
 ---
 
@@ -136,6 +214,6 @@ Dựa trên **[MicroEmulator](https://github.com/barteo/microemu)** 3.0.0 (Apach
 
 <div align="center">
 
-Làm bởi **Cherry** · [Báo lỗi](../../issues)
+Làm bởi **Cherry** · [Báo lỗi](../../issues/new/choose) · [Đóng góp](CONTRIBUTING.md) · [Bảo mật](SECURITY.md)
 
 </div>

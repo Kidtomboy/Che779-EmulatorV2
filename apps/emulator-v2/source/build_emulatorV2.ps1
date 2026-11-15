@@ -1,4 +1,4 @@
-# Che779 EmulatorV2 0.0.0.2 custom - build script (PowerShell)
+# Che779 EmulatorV2 1.2.0 - build script (PowerShell)
 # Yeu cau: JDK 8+ (javac, jar). Chay:
 # powershell -ExecutionPolicy Bypass -File build_emulatorV2.ps1
 
@@ -123,7 +123,7 @@ try {
         'Main-Class: com.che779.emu.Che779Main'
         'Class-Path: lib/jna.jar'
         'Implementation-Title: Che779 EmulatorV2'
-        'Implementation-Version: 0.0.0.2 custom'
+        'Implementation-Version: 1.2.0'
         'Created-By: Che779 Team'
         ''
     ) -join "`r`n"
@@ -132,7 +132,7 @@ try {
 
     # [5/5] Dong goi JAR
     Write-Host '[5/5] Dong goi jar...'
-    $output = Join-Path (Split-Path -Parent $PSScriptRoot) 'Che779_EmulatorV2.jar'
+    $output = Join-Path $PSScriptRoot 'Che779_EmulatorV2.jar'
 
     if (Test-Path -LiteralPath $output) {
         Remove-Item -LiteralPath $output -Force

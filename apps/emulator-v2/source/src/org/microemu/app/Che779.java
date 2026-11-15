@@ -11,7 +11,7 @@ public final class Che779 {
 	/** Ten thu muc con trong %APPDATA%\Che779 (V2 doi thanh Che779-EmulatorV2). */
 	public static String APP_DIR = "Che779-Emulator";
 	/** Phien ban (ban custom). Hien trong About, log, IPC status va Remoter. */
-	public static final String VERSION = "0.0.0.2 custom";
+	public static final String VERSION = "1.2.0";
 
 	/**
 	 * Thu muc du lieu: -Dche779.data=... (Remoter truyen vao) > %APPDATA%\Che779\Che779-Emulator > ~/.che779
