@@ -1,47 +1,25 @@
-# Project State — Che779 Emulator V2
+# Trạng thái dự án — Che779 Emulator V2
 
-## Trạng thái
+**Phiên bản:** `1.2.0` (file `VERSION`)
 
-**Implementation pass tiếp theo đã được áp dụng trên source ZIP gốc; chờ Cherry nghiệm thu.** Không được gọi đây là bản phát hành production hoặc tuyên bố tương thích mọi hệ điều hành.
+## Tóm tắt
 
-## Baseline
+Emulator nhiều tab trong một tiến trình Java. Chủ dự án xác nhận chạy tốt trên Windows với đủ 12 tab; Claude đã chạy trên Linux và mở được game thật. Theo quyết định của chủ dự án, phần mã được giữ nguyên, chỉ sửa khi có người dùng yêu cầu.
 
-- Archive đầu vào: `Che779_EmulatorV2_0.0.0.2_custom(1).zip`
-- SHA-256: `1830f850004ac9a5a241e6868954a6376e6bad6c337d71c9774e863e3933af47`
-- ZIP có 411 entries, `testzip()` không báo lỗi.
-- 323 Java source files theo inventory ban đầu.
-- JAR baseline có 655 entries.
+## Đã có
 
-## Revision hiện tại
+- Bộ build đủ cho Linux (`.sh`) và Windows (`.cmd`, `.ps1`), không cần `unzip`.
+- CI build trên Linux và Windows; kiểm thử bộ đọc IPC.
+- Phát hành tự động: gắn thẻ `vX.Y.Z` → zip + `SHA256SUMS.txt`.
 
-- Linux build script dùng JDK 8-compatible `-source 8 -target 8` và tạo JAR ở root.
-- Windows CMD/PowerShell cũng dùng source/target 8; Windows runtime build chưa chạy trong môi trường này.
-- IPC có bounded line, timeout, giới hạn số client, strict flat JSON parser.
-- Có regression test parser và CI workflow.
-- JAR mới có 655 entries; so với JAR baseline: không thiếu/thừa entry; chỉ 4 entry `IpcServer*.class` thay đổi nội dung, đúng phạm vi code IPC được chỉnh.
+## Chưa kiểm chứng
 
-## Kiểm thử đã chạy
+Xem [TESTING](TESTING.md): workflow Phát hành chưa chạy thật; Android/Termux trực tiếp; chịu tải nhiều tab; proxy xoay vòng.
 
-- [x] Giải nén ZIP gốc và kiểm tra CRC.
-- [x] Runtime smoke test dưới Xvfb: `ping`, `status`, 12 slot ban đầu, `add_tab` tăng lên 13 và `quit`.
-- [x] Build lại từ đường dẫn có dấu cách trên Linux.
-- [x] Build Linux bằng OpenJDK 21.
-- [x] Đối chiếu cấu trúc JAR baseline/new.
-- [ ] Chạy Windows CMD build thực tế.
-- [ ] Chạy PowerShell build thực tế.
-- [ ] Chạy Android/Termux.
-- [ ] Kiểm thử game JAR đa dạng, RMS, proxy, đồng bộ và lifecycle nhiều tab.
-- [ ] Kiểm tra GitHub Actions sau khi Cherry push repository.
+## Rủi ro còn lại
 
-## Backlog còn lại
+Xem [DEBUG_LOG](DEBUG_LOG.md) và [SECURITY](../SECURITY.md): dọn luồng khi đóng tab, IPC chưa xác thực, mật khẩu proxy chữ thường.
 
-1. Xác minh license/NOTICE chính xác của toàn bộ source và ASM 3.2; chưa tự gán một license chung khi chưa đủ chứng cứ.
-2. Xác thực IPC (token hoặc secret local) và quản lý secret an toàn; loopback không thay thế authentication trước process local không đáng tin.
-3. `ipcAddTab`/`ipcOpen` hiện trả về sau khi enqueue Swing EDT, không chứng minh game load thành công. Cần protocol async/result nếu muốn ACK chính xác mà không phá client cũ.
-4. Đánh giá lưu mật khẩu proxy trong `tab_proxies.txt` và file quyền trên Windows.
-5. Kiểm thử lỗi classloader, RMS isolation, crash recovery, memory pressure và proxy rotation.
-6. Cần xác minh yêu cầu JNA native library cho clean RAM theo từng OS/architecture.
+## Nguồn sự thật
 
-## Quy tắc phê duyệt
-
-Cherry là người duyệt cuối. Không bắt đầu Project 3 khi Project 2 chưa được Cherry chấp thuận.
+Mã nguồn và commit là bằng chứng về cách làm; log CI là bằng chứng về build. File này chỉ tóm tắt — khi mâu thuẫn, tin mã nguồn và CI.
