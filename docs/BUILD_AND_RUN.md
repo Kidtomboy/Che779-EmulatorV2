@@ -8,7 +8,7 @@ Cần **Java 8 trở lên**.
 java -jar Che779_EmulatorV2.jar [game1.jar game2.jar ...]
 ```
 
-Không truyền game thì V2 mở lại các tab của lần trước (`tabs.txt`). Bản phát hành có sẵn `chay.cmd` (Windows) và `chay.sh` (Linux).
+Không truyền game thì V2 mở lại các tab của lần trước (`tabs.txt`). Bản phát hành có sẵn `chay.cmd`.
 
 ## Giao diện nhanh
 
@@ -16,10 +16,10 @@ Mỗi ô tab có `Tab N: [tên game]`, ô **Sync**, nút **P** (proxy riêng: Tr
 
 ## Dữ liệu
 
-| | Windows | Linux |
-|---|---|---|
-| Thư mục | `%APPDATA%\Che779\Che779-EmulatorV2` | `~/.che779` |
-| Nội dung | `Che779V2.xml` (cấu hình), `proxies.txt`, `servers.txt`, `tabs.txt`, `tab_proxies.txt`, RMS từng tab, `Che779V2.log` | như Windows |
+| | Windows |
+|---|---|
+| Thư mục | `%APPDATA%\Che779\Che779-EmulatorV2` |
+| Nội dung | `Che779V2.xml` (cấu hình), `proxies.txt`, `servers.txt`, `tabs.txt`, `tab_proxies.txt`, RMS từng tab, `Che779V2.log` |
 
 Tab báo "Game đã thoát" hoặc "Tab gặp sự cố" có nút **Xem log**; gửi file `Che779V2.log` khi báo lỗi.
 
@@ -29,7 +29,6 @@ Cần **JDK 8 trở lên** (đã kiểm chứng với OpenJDK 21), không cần 
 
 | Hệ điều hành | Lệnh |
 |---|---|
-| Linux / macOS | `cd apps/emulator-v2/source && ./build.sh` |
 | Windows CMD | `apps\emulator-v2\source\build_emulatorV2.cmd` |
 | Windows PowerShell | `powershell -ExecutionPolicy Bypass -File apps\emulator-v2\source\build_emulatorV2.ps1` |
 

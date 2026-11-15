@@ -1,6 +1,6 @@
 # Trạng thái dự án — Che779 Emulator V2
 
-**Phiên bản:** `1.2.0` (file `VERSION`)
+**Phiên bản:** `1.3.0` (file `VERSION`)
 
 ## Tóm tắt
 
@@ -8,7 +8,7 @@ Emulator nhiều tab trong một tiến trình Java. Chủ dự án xác nhận 
 
 ## Đã có
 
-- Bộ build đủ cho Linux (`.sh`) và Windows (`.cmd`, `.ps1`), không cần `unzip`.
+- Bộ build Windows (`.cmd`, `.ps1`), không cần `unzip`. Repo này **chỉ Windows**; bản Linux ở Che779-Linux. `.github/scripts/build-emulator-v2.sh` chỉ phục vụ CI và Che779-Linux.
 - CI build trên Linux và Windows; kiểm thử bộ đọc IPC.
 - Phát hành tự động: gắn thẻ `vX.Y.Z` → zip + `SHA256SUMS.txt`.
 

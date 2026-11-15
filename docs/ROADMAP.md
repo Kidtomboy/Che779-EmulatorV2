@@ -1,6 +1,6 @@
 # Lộ trình
 
-## Đã có trong 1.2.0
+## Đã có trong 1.3.0
 Xem [`CHANGELOG.md`](../CHANGELOG.md).
 
 ## Có thể làm tiếp (chỉ khi có yêu cầu)

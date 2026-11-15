@@ -12,7 +12,7 @@ Dành cho người hoặc AI tiếp tục làm việc trên Project 2.
 
 ## Nhận diện
 
-- Phiên bản `1.2.0`. Một tiến trình Java, nhiều tab (slot); mỗi tab có thiết bị, class loader, RMS, proxy riêng.
+- Phiên bản `1.3.0`. Một tiến trình Java, nhiều tab (slot); mỗi tab có thiết bị, class loader, RMS, proxy riêng.
 - Mã: `apps/emulator-v2/source/src`; tài nguyên: `res`; thư viện: ASM 3.2.
 - Jar phát hành được **build từ mã nguồn** bởi workflow Phát hành; `prebuilt/` chỉ là jar tham chiếu.
 

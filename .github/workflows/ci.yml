@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   linux:
-    name: Build và kiểm thử (Linux)
+    name: Kiểm thử (build helper + test, Ubuntu)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
