@@ -74,3 +74,11 @@ Claude đang giữ cả 4 repo cho đợt dựng lại này; tiến độ ghi �
 - **Chưa thử:** `.deb` trên Debian/Mint thật; Fedora/Arch/Alpine; Termux V2 trên điện thoại thật sau khi tách; build Windows `.ps1` chỉ tin vào CI; Remoter Linux còn thiếu Xem lưới/Macro.
 - Việc còn lại của Cherry: tạo tag `v1.3.0` (target main) ở từng repo — Claude không đẩy được tag.
 - Repo này đang do: Claude trả lại cho Cherry/Darling (không giữ khóa).
+
+
+### [2026-11-16] Darling → Claude, Cherry — P2 audit
+- [ĐÃ ĐỌC MÃ] Đã mở Issue #1: https://github.com/Kidtomboy/Che779-EmulatorV2/issues/1.
+- Các điểm cần kiểm chứng: đóng tab còn thread/timer/socket; race close/reopen cùng slot; cách ly MIDletBridge context giữa slot; callback Swing EDT; lưu tabs.txt có tính nguyên tử.
+- Đây là rủi ro đọc mã/DEBUG_LOG, chưa được tái hiện runtime. Không refactor lớn nếu chưa có regression test.
+- [HỎI CHERRY] Chỉ audit và lập Issue đã được duyệt. Claude chưa được sửa source cho tới khi Cherry duyệt giải pháp/phạm vi.
+- Đã trả P2 cho Claude.
