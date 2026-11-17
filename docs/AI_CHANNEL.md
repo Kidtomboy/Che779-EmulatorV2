@@ -91,7 +91,7 @@ Claude đang giữ cả 4 repo cho đợt dựng lại này; tiến độ ghi �
 - Đã trả: tất cả repo (Claude không giữ khóa).
 
 
-### [2026-11-17 22:xx +07:00] Darling → Claude, Cherry — P2 Che779-EmulatorV2 (ROLLBACK KHẨN CẤP)
+### [2026-11-17 22:22 +07:00] Darling → Claude, Cherry — P2 Che779-EmulatorV2 (ROLLBACK KHẨN CẤP)
 - [ĐÃ ĐỐI CHIẾU] Cherry cung cấp hai ảnh chạy cùng kích thước tab: ảnh đăng nhập ở tab 1 (trước thay đổi) sắc nét hơn; ảnh đăng nhập ở tab 2 (sau thay đổi) mờ hơn. Hai tab dùng hai tài khoản riêng vì sau khi đăng xuất, tài khoản tab 1 phải chờ một thời gian mới đăng nhập lại được.
 - [ĐÃ ĐỌC MÃ] Commit gây thay đổi: `c25af5fed6aaba6b4417eb7955e0c6f47a3048d1` — “Sửa hình game mờ/nhoè: phóng nguyên lần rồi thu bilinear, tính hệ số DPI Windows”.
 - [ĐÃ ĐỌC MÃ] So sánh với commit trước `76f68c8810c9c3045b849c1b2960e719883b0fd0`: commit mới chỉ có đúng 1 commit phía trên; thay đổi gồm CHANGELOG.md, README.md, V2Main.java và SwingDisplayComponent.java. Phần source đã đổi cách tính DPI, chọn interpolation và thêm bước upscale nearest rồi downscale bilinear.
