@@ -89,3 +89,15 @@ Claude đang giữ cả 4 repo cho đợt dựng lại này; tiến độ ghi �
 - Darling làm tiếp (theo thứ tự): (1) tải từng file ở Releases, chạy `sha256sum -c SHA256SUMS.txt`; (2) cài `.deb` trên Ubuntu/Mint thật rồi chạy `che779` và `che779-remoter` (chưa thử máy thật); (3) thử `che779-termux.sh` trên điện thoại (V2; `termux/test/` là V1 không hỗ trợ); (4) đối chiếu Remoter Linux với Windows (thiếu Xem lưới, Macro); (5) Releases cũ ở P4 (`latest`, `buildlog`, `clone-com-che779-emulatorv2`) là của quy trình cũ — hỏi Cherry trước khi xóa.
 - Mọi chỉnh sửa cần ghi `docs/DEBUG_LOG.md`, `TESTING.md`, `PROJECT_STATE.md` kèm bằng chứng; tài liệu tổng: `che779-projects` mục I.
 - Đã trả: tất cả repo (Claude không giữ khóa).
+
+
+### [2026-11-17 22:xx +07:00] Darling → Claude, Cherry — P2 Che779-EmulatorV2 (ROLLBACK KHẨN CẤP)
+- [ĐÃ ĐỐI CHIẾU] Cherry cung cấp hai ảnh chạy cùng kích thước tab: ảnh đăng nhập ở tab 1 (trước thay đổi) sắc nét hơn; ảnh đăng nhập ở tab 2 (sau thay đổi) mờ hơn. Hai tab dùng hai tài khoản riêng vì sau khi đăng xuất, tài khoản tab 1 phải chờ một thời gian mới đăng nhập lại được.
+- [ĐÃ ĐỌC MÃ] Commit gây thay đổi: `c25af5fed6aaba6b4417eb7955e0c6f47a3048d1` — “Sửa hình game mờ/nhoè: phóng nguyên lần rồi thu bilinear, tính hệ số DPI Windows”.
+- [ĐÃ ĐỌC MÃ] So sánh với commit trước `76f68c8810c9c3045b849c1b2960e719883b0fd0`: commit mới chỉ có đúng 1 commit phía trên; thay đổi gồm CHANGELOG.md, README.md, V2Main.java và SwingDisplayComponent.java. Phần source đã đổi cách tính DPI, chọn interpolation và thêm bước upscale nearest rồi downscale bilinear.
+- [ĐÃ THỰC HIỆN] Theo yêu cầu khẩn cấp của Cherry, nhánh `main` đã được đưa trở lại commit `76f68c8810c9c3045b849c1b2960e719883b0fd0` bằng force-with-lease (expected head là `c25af5fed6aaba6b4417eb7955e0c6f47a3048d1`). Commit c25 vẫn còn trong lịch sử Git, không bị xóa khỏi object database.
+- [QUYẾT ĐỊNH CỦA CHERRY] Tạm thời giữ nguyên cơ chế render ở commit cũ. Cách xử lý hiện tại là người dùng tự điều chỉnh kích thước tab phù hợp để ảnh nét hơn. Không tự ý thử thêm thuật toán scale/interpolation/DPI.
+- [CẤM THỰC HIỆN] Không đưa lại commit c25 hoặc các thay đổi render tương tự; không sửa V2Main.java / SwingDisplayComponent.java liên quan hiển thị ảnh; không tự tạo commit sửa render, không cherry-pick/revert bổ sung, không force-push nhánh main lần nữa.
+- [YÊU CẦU CLAUDE] Dừng ngay mọi công việc liên quan cải thiện độ nét/render của P2. Đọc ghi chú này và xác nhận đã nắm quyết định. Nếu sau này cần nghiên cứu, chỉ phân tích/đề xuất trước; phải có Cherry duyệt rõ ràng rồi mới được sửa mã.
+- [TRẠNG THÁI] Rollback source đã áp dụng trên GitHub. Chưa tuyên bố đã build hoặc chạy kiểm thử GUI sau rollback; cần Cherry cập nhật local clone và tự kiểm tra ứng dụng. Không được ghi nhận runtime test khi chưa chạy.
+- Đã trả: P2 cho Cherry/Darling; Claude không được tự tiếp tục chỉnh phần render nếu chưa có phê duyệt mới.
