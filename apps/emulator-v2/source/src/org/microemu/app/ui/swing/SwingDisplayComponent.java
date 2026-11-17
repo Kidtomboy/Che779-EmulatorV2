@@ -470,10 +470,43 @@ public class SwingDisplayComponent extends JComponent implements DisplayComponen
 
 	/** Che779 V2: ve anh man hinh game (co thu phong) len g, khong qua he thong ve cua Swing. */
 	public void paintScaled(java.awt.Graphics2D g, int w, int h) {
+		paintScaled(g, w, h, 1);
+	}
+
+	private java.awt.image.BufferedImage upTmp;
+
+	/**
+	 * Che779 V2: ve nhan do phan giai. k &gt; 1: phong to nguyen k lan bang nearest (giu net diem anh),
+	 * sau do thu ve kich thuoc dich bang bilinear (muot, khong bi vo hat). Tranh hien tuong mo/nhoe khi
+	 * ti le phong to khong nguyen (vd 1.37x) hoac khi Windows dat scale 125%/150%.
+	 */
+	public void paintScaled(java.awt.Graphics2D g, int w, int h, int k) {
 		J2SEGraphicsSurface gs = graphicsSurface;
-		if (gs != null) {
-			synchronized (gs) {
-				g.drawImage(gs.getImage(), 0, 0, w, h, null);
+		if (gs == null) {
+			return;
+		}
+		synchronized (gs) {
+			java.awt.image.BufferedImage src = gs.getImage();
+			if (k > 1) {
+				int tw = src.getWidth() * k, th = src.getHeight() * k;
+				if (upTmp == null || upTmp.getWidth() != tw || upTmp.getHeight() != th) {
+					upTmp = new java.awt.image.BufferedImage(tw, th, java.awt.image.BufferedImage.TYPE_INT_ARGB);
+				}
+				java.awt.Graphics2D t = upTmp.createGraphics();
+				try {
+					t.setComposite(java.awt.AlphaComposite.Src);
+					t.setRenderingHint(java.awt.RenderingHints.KEY_INTERPOLATION,
+							java.awt.RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+					t.drawImage(src, 0, 0, tw, th, null);
+				} finally {
+					t.dispose();
+				}
+				g.setRenderingHint(java.awt.RenderingHints.KEY_INTERPOLATION,
+						(w == tw && h == th) ? java.awt.RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR
+								: java.awt.RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+				g.drawImage(upTmp, 0, 0, w, h, null);
+			} else {
+				g.drawImage(src, 0, 0, w, h, null);
 			}
 		}
 	}

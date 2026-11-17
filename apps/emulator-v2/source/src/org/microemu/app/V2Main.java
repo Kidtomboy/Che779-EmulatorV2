@@ -249,11 +249,19 @@ public class V2Main extends Main {
 			calc();
 			java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();
 			try {
+				// he so DPI cua Windows (125% = 1.25...): tinh theo diem anh vat ly de khong bi nhoe
+				double tx = Math.abs(g2.getTransform().getScaleX());
+				if (tx < 0.5) {
+					tx = 1;
+				}
+				double phys = sc * tx;
+				g2.setRenderingHint(java.awt.RenderingHints.KEY_RENDERING, java.awt.RenderingHints.VALUE_RENDER_QUALITY);
 				g2.setRenderingHint(java.awt.RenderingHints.KEY_INTERPOLATION,
-						sc >= 1 ? java.awt.RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR
+						phys >= 1 ? java.awt.RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR
 								: java.awt.RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 				g2.translate(ox, oy);
-				((SwingDisplayComponent) dev.getDisplayComponent()).paintScaled(g2, (int) Math.round(pw * sc), (int) Math.round(ph * sc));
+				int k = phys > 1.001 ? (int) Math.ceil(phys - 0.001) : 1;
+				((SwingDisplayComponent) dev.getDisplayComponent()).paintScaled(g2, (int) Math.round(pw * sc), (int) Math.round(ph * sc), k);
 			} finally {
 				g2.dispose();
 			}

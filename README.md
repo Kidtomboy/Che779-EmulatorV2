@@ -155,6 +155,7 @@ Chủ dự án phát hành bằng cách gắn thẻ `vX.Y.Z`: workflow **Phát h
 | Bạn gặp | Làm gì |
 |---|---|
 | Bấm `chay.cmd` mà không thấy gì | Kiểm tra đã cài Java 8+ (`java -version` trong cửa sổ lệnh). |
+| Hình game bị mờ / nhoè | Kéo cửa sổ hoặc chọn kích thước màn hình tab (menu Hiển thị) sao cho tab gấp **số nguyên lần** màn hình game (2×, 3×) thì hình sắc nét nhất. Dùng Java 11 trở lên: Java 8 trên Windows không tự xử lý scale 125%/150% nên cả cửa sổ bị Windows kéo giãn. |
 | Build báo "jar đang được sử dụng" | Đóng Che779 EmulatorV2 đang chạy rồi build lại. |
 | Tab báo "Game đã thoát" / "Tab gặp sự cố" | Bấm **Xem log**, rồi **Khởi động lại game**. Gửi `Che779V2.log` khi báo lỗi. |
 | Game không vào được mạng | Thử đổi máy chủ ("Thay IP") hoặc đặt proxy cho tab trong menu **Che779**. Lỗi mạng còn có thể do chính máy chủ game. |

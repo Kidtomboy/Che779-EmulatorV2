@@ -2,6 +2,11 @@
 
 Chỉ ghi những gì **phiên bản hiện tại** đang làm được. Lịch sử các bản trước không còn được lưu ở đây.
 
+## [Chưa phát hành]
+
+### Sửa
+- Hình game bớt **mờ/nhoè**: trước đây khi tab thu phóng không nguyên (ví dụ 1,37×) hoặc Windows đặt scale 125%/150%, ảnh bị kéo giãn trực tiếp nên vỡ hạt hoặc nhoè. Nay phóng nguyên lần bằng nearest rồi thu về đúng kích thước bằng bilinear, có tính hệ số DPI của Windows. Chưa kiểm chứng trên màn hình Windows thật.
+
 ## [1.3.0] — Bản phát hành (chỉ Windows)
 
 > Từ 1.3.0 repo này chỉ dành cho Windows. Bản Linux nằm ở Che779-Linux.
