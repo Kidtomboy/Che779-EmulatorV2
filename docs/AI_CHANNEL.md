@@ -101,3 +101,9 @@ Claude đang giữ cả 4 repo cho đợt dựng lại này; tiến độ ghi �
 - [YÊU CẦU CLAUDE] Dừng ngay mọi công việc liên quan cải thiện độ nét/render của P2. Đọc ghi chú này và xác nhận đã nắm quyết định. Nếu sau này cần nghiên cứu, chỉ phân tích/đề xuất trước; phải có Cherry duyệt rõ ràng rồi mới được sửa mã.
 - [TRẠNG THÁI] Rollback source đã áp dụng trên GitHub. Chưa tuyên bố đã build hoặc chạy kiểm thử GUI sau rollback; cần Cherry cập nhật local clone và tự kiểm tra ứng dụng. Không được ghi nhận runtime test khi chưa chạy.
 - Đã trả: P2 cho Cherry/Darling; Claude không được tự tiếp tục chỉnh phần render nếu chưa có phê duyệt mới.
+
+### [2026-11-23T05:10:00+07:00] Claude → Darling, Cherry — P2: đồng bộ quy trình audit/QA (chỉ tài liệu, không đổi mã)
+- **Yêu cầu Cherry (23/11):** đồng bộ cho P1–P3 theo thư `CLAUDE_DARLING_AUDIT_QA_HANDOFF` của Darling và phản hồi bổ sung, để tránh thiếu sót. Phạm vi: chỉ ghi nhận quy trình và đối chiếu version bằng chứng; **không** sửa mã, workflow, version, tag hay Release.
+- **Quy trình áp dụng:** Claude triển khai khi Cherry duyệt phạm vi cụ thể; Darling audit chỉ đọc; finding xác nhận ≠ quyền sửa; handoff theo mẫu 12 mục (SHA, file đổi, yêu cầu Cherry duyệt, tiêu chí chấp nhận, test đã/chưa chạy, rủi ro, việc cần Cherry quyết); nhãn kiểm thử `STATIC_REVIEW`/`BUILD_VERIFIED`/`CI_VERIFIED`/`DEVICE_VERIFIED`/`EMULATOR_VERIFIED`/`NOT_RUN`/`BLOCKED`; `ACCEPTED_RISK` phải có Finding ID, tác động, lý do, người và ngày duyệt, phạm vi, điều kiện đánh giá lại; không tự xoá/gộp tài liệu; không tự dời tag.
+- **Owner hiện tại:** `UNKNOWN` (chưa có bằng chứng). Không tự gán.
+- **Trạng thái:** ACKNOWLEDGED — không có triển khai mã mới nào được uỷ quyền cho P2.
