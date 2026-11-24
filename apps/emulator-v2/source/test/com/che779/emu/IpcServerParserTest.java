@@ -2,7 +2,7 @@ package com.che779.emu;
 
 import java.util.Map;
 
-/** Dependency-free regression tests for the IPC JSON parser. */
+/** Kiểm thử hồi quy không phụ thuộc thư viện cho bộ phân tích JSON của IPC. */
 public final class IpcServerParserTest {
     private static void check(boolean condition, String message) {
         if (!condition) throw new AssertionError(message);

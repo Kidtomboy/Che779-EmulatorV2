@@ -79,7 +79,7 @@ final class IpcServer {
         return b.length() == 0 ? null : b.toString();
     }
 
-    // Strict flat-object JSON parser: accepts string, number, boolean and null values.
+    // Bộ phân tích JSON phẳng nghiêm ngặt: nhận chuỗi, số, boolean và null.
     static Map<String, String> parse(String json) {
         if (json == null) throw new IllegalArgumentException("null JSON");
         int[] p = {0}; Map<String, String> m = new HashMap<String, String>(); skipWs(json,p); expect(json,p,'{'); skipWs(json,p);
