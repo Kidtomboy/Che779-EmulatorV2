@@ -4,7 +4,7 @@ chcp 65001 >nul
 cd /d "%~dp0"
 
 REM ============================================================
-REM Che779 EmulatorV2 1.3.0 - Windows build
+REM Che779 EmulatorV2 1.3.1 - Windows build
 REM Requires JDK 8+ (JAVA_HOME or javac/jar in PATH)
 REM Output: Che779_EmulatorV2.jar (cung thu muc voi script)
 REM ============================================================
@@ -111,7 +111,7 @@ echo [4/5] Creating manifest...
 >>"manifest.txt" echo Main-Class: com.che779.emu.Che779Main
 >>"manifest.txt" echo Class-Path: lib/jna.jar
 >>"manifest.txt" echo Implementation-Title: Che779 EmulatorV2
->>"manifest.txt" echo Implementation-Version: 1.3.0
+>>"manifest.txt" echo Implementation-Version: 1.3.1
 >>"manifest.txt" echo Created-By: Che779 Team
 
 echo [5/5] Packaging JAR...

@@ -12,7 +12,7 @@ Dành cho người hoặc AI tiếp tục làm việc trên Project 2.
 
 ## Nhận diện
 
-- Phiên bản `1.3.0`. Một tiến trình Java, nhiều tab (slot); mỗi tab có thiết bị, class loader, RMS, proxy riêng.
+- Phiên bản `1.3.1`. Một tiến trình Java, nhiều tab (slot); mỗi tab có thiết bị, class loader, RMS, proxy riêng.
 - Mã: `apps/emulator-v2/source/src`; tài nguyên: `res`; thư viện: ASM 3.2.
 - Jar phát hành được **build từ mã nguồn** bởi workflow Phát hành; `prebuilt/` chỉ là jar tham chiếu.
 
@@ -33,9 +33,9 @@ Darling đã rà soát source và tài liệu ở revision hiện tại. Danh s�
 ## Đối chiếu version — 2026-11-23 (đồng bộ theo yêu cầu Cherry)
 | Nguồn | Giá trị |
 |---|---|
-| `VERSION` / `PROJECT_STATE.md` | 1.3.0 |
+| `VERSION` / `PROJECT_STATE.md` / script build | 1.3.1 (nguồn; Release `v1.3.1` chưa có) |
 | HEAD `main` | `773749089775d8df650bd25cb5646cdb9ef2031e` |
-| Tag | `v1.3.0` → `8e41191`; `v1.2.0` → `8653e96`; `v1.3.1` → `c25af5f` (không có Release `v1.3.1`; commit `c25af5f` đã bị rollback khỏi `main`, xem ghi chú rollback trong AI_CHANNEL) |
+| Tag | `v1.3.0` → `8e41191`; `v1.2.0` → `8653e96`; `v1.3.1` → `c25af5f` (tag CŨ trỏ commit đã rollback khỏi `main`, không có Release; bản 1.3.1 mới cần Cherry dời/tạo lại tag trước khi phát hành, Claude không tự dời tag) |
 | Release | Release `v1.3.0`, `v1.2.0` (target `main`) |
 - Chưa cài/chạy artifact thực tế: `NOT_RUN`. Mức kiểm tra ở đây chỉ là đối chiếu metadata Git/GitHub (`STATIC_REVIEW`).
 - Mọi chênh lệch (nếu có) giữ nguyên là version inconsistency cho đến khi Cherry/Darling xác định nguồn chuẩn; Claude không tự sửa version hay dời tag.
