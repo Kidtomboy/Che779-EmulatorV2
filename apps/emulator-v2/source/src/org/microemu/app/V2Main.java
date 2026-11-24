@@ -98,7 +98,15 @@ public class V2Main extends Main {
 		initLogging();
 		ProxyManager.onSlotChange = new Runnable() {
 			public void run() {
-				saveSlotProxies();
+				if (javax.swing.SwingUtilities.isEventDispatchThread()) {
+					saveSlotProxies();
+				} else {
+					javax.swing.SwingUtilities.invokeLater(new Runnable() {
+						public void run() {
+							saveSlotProxies();
+						}
+					});
+				}
 			}
 		};
 		getContentPane().setBackground(BG);
@@ -596,7 +604,9 @@ public class V2Main extends Main {
 				return;
 			}
 			f.getParentFile().mkdirs();
-			PrintWriter w = new PrintWriter(new OutputStreamWriter(new java.io.FileOutputStream(f), "UTF-8"));
+			// Ghi ra tep tam roi doi ten de mat dien giua chung khong lam hong tabs.txt
+			File tmp = new File(f.getPath() + ".tmp");
+			PrintWriter w = new PrintWriter(new OutputStreamWriter(new java.io.FileOutputStream(tmp), "UTF-8"));
 			try {
 				w.println("ui=2");
 				w.println("grid=" + gridMode);
@@ -607,6 +617,12 @@ public class V2Main extends Main {
 				}
 			} finally {
 				w.close();
+			}
+			try {
+				java.nio.file.Files.move(tmp.toPath(), f.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING,
+						java.nio.file.StandardCopyOption.ATOMIC_MOVE);
+			} catch (java.nio.file.AtomicMoveNotSupportedException ex) {
+				java.nio.file.Files.move(tmp.toPath(), f.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
 			}
 		} catch (Throwable t) {
 			Logger.debug("saveTabs", t.toString());
@@ -715,12 +731,17 @@ public class V2Main extends Main {
 	// ------------------------------------------------------------------ bo nho / CPU
 	private void startMemoryTimer() {
 		new javax.swing.Timer(2000, new ActionListener() {
+			private long lastClean;
+
 			public void actionPerformed(ActionEvent e) {
 				refreshExtra();
 				if (heapThreshold > 0) {
 					Runtime rt = Runtime.getRuntime();
 					long used = rt.totalMemory() - rt.freeMemory();
-					if (used * 100L / rt.maxMemory() >= heapThreshold) {
+					long now = System.currentTimeMillis();
+					// nghi toi thieu 30 giay giua hai lan don de khong don don dap khi heap sat nguong
+					if (used * 100L / rt.maxMemory() >= heapThreshold && now - lastClean >= 30000L) {
+						lastClean = now;
 						try {
 							com.che779.emu.CleanRam.run();
 						} catch (Throwable t) {

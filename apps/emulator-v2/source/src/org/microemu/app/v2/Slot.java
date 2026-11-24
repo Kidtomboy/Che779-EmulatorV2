@@ -150,7 +150,10 @@ public class Slot implements SlotBinder {
 		state = State.LOADING;
 		error = null;
 		fire();
-		Thread t = new Thread(new Runnable() {
+		// Moi lan nap game co ThreadGroup rieng: luong game tao ra se thuoc nhom nay va duoc ngat khi dong tab
+		final ThreadGroup group = new ThreadGroup("slot-" + id + "-game");
+		gameGroup = group;
+		Thread t = new Thread(group, new Runnable() {
 			public void run() {
 				try {
 					synchronized (LOAD_LOCK) {
@@ -184,6 +187,29 @@ public class Slot implements SlotBinder {
 		}, "slot-" + id + "-loader");
 		t.setDaemon(true);
 		t.start();
+	}
+
+	private volatile ThreadGroup gameGroup;
+
+	/** Ngat cac luong game con lai cua tab (tru luong dang chay lenh nay). Co gang toi da, khong dam bao dung het. */
+	private void interruptGameThreads() {
+		ThreadGroup g = gameGroup;
+		gameGroup = null;
+		if (g == null) {
+			return;
+		}
+		try {
+			Thread[] list = new Thread[Math.max(8, g.activeCount() * 2)];
+			int n = g.enumerate(list, true);
+			Thread me = Thread.currentThread();
+			for (int i = 0; i < n; i++) {
+				if (list[i] != me) {
+					list[i].interrupt();
+				}
+			}
+		} catch (Throwable e) {
+			Logger.debug("interruptGameThreads", e.toString());
+		}
 	}
 
 	private volatile boolean panelInit;
@@ -312,10 +338,11 @@ public class Slot implements SlotBinder {
 			public void run() {
 				synchronized (LOAD_LOCK) {
 					closeGameInternal();
+					// doi trang thai trong khoa de khong dua voi thao tac nap game ngay sau do
+					state = State.EMPTY;
+					name = "Trống";
+					jarPath = null;
 				}
-				state = State.EMPTY;
-				name = "Trống";
-				jarPath = null;
 				fire();
 			}
 		}, "slot-" + id + "-close").start();
@@ -341,6 +368,7 @@ public class Slot implements SlotBinder {
 		} finally {
 			exit(t);
 		}
+		interruptGameThreads();
 	}
 
 	/** Duoc goi khi game tu thoat. */

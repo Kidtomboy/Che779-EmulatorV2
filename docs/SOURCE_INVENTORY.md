@@ -3,7 +3,7 @@
 ## Nguồn
 
 - Mã nguồn gốc do chủ dự án cung cấp ở dạng gói `Che779_EmulatorV2_0.0.0.2_custom(1).zip` (SHA-256 `1830f850004ac9a5a241e6868954a6376e6bad6c337d71c9774e863e3933af47`, 411 mục, kiểm tra CRC đạt). Đây là gói đầu vào lịch sử; phiên bản phát hành hiện tại là `1.2.0`.
-- Nền tảng: **MicroEmulator 3.0.0** (Apache License 2.0). Một số ý tưởng chức năng tham khảo HERO-Emulator-V2 của Hùng Hero với sự đồng ý của tác giả; mã Che779 được viết lại.
+- Nền tảng: **MicroEmulator 3.0.0** (Apache License 2.0). Mã Che779 được viết lại.
 
 ## Kiểm kê hiện tại (`apps/emulator-v2/source/`)
 
