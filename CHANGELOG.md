@@ -4,6 +4,7 @@ Chỉ ghi những gì **phiên bản hiện tại** đang làm được. Lịch 
 
 ## [1.3.1] — Bản phát hành (chỉ Windows)
 
+- **Nhật ký build:** CI đăng log mỗi lần push main lên Release `buildlog`; Phát hành kiểm tra thẻ khớp `VERSION`.
 So với 1.3.0: sửa an toàn luồng khi đổi proxy theo tab (chạy trên luồng giao diện), ghi `tabs.txt` qua tệp tạm rồi thay thế, ngắt các luồng còn sót của game khi đóng tab, giãn tối thiểu 30 giây giữa hai lần dọn RAM tự động. Chưa chạy thử trên Windows (`NOT_RUN`).
 
 > Từ 1.3.0 repo này chỉ dành cho Windows. Bản Linux nằm ở Che779-Linux.

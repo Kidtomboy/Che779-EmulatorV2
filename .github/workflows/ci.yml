@@ -36,3 +36,28 @@ jobs:
         working-directory: apps/emulator-v2/source
         shell: pwsh
         run: ./build_emulatorV2.ps1
+
+  nhat-ky-build:
+    name: Nhật ký build
+    if: always() && github.event_name != 'pull_request'
+    needs: [linux, windows]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: read
+    concurrency:
+      group: buildlog
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - name: Đăng nhật ký build lên Release "buildlog"
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash .github/scripts/publish-buildlog.sh buildlog "Nhật ký build"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: build-log-${{ github.run_id }}
+          path: build-tail.log
+          if-no-files-found: ignore
+          retention-days: 14
