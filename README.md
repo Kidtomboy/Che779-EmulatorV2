@@ -7,7 +7,7 @@
 Dựa trên MicroEmulator 3.0.0, thêm lớp Che779: tab, lưới, proxy theo tab, đồng bộ thao tác và dọn RAM.
 Mở lên là dùng trên Windows.
 
-> **Nền tảng: Windows.** Quy ước 4 repo: **P1 và P2 = Windows · P3 = Linux · P4 = Android (kèm Termux)**. Bản Linux (gói `.deb`/`.tar.gz`, gồm V2) nằm ở [Che779-Linux](https://github.com/Kidtomboy/Che779-Linux).
+> **Nền tảng: Windows.** Quy ước 4 repo: **P1 và P2 = Windows · P3 = Linux (kèm Termux) · P4 = Android**. Bản Linux (gói `.deb`/`.tar.gz`, gồm V2) nằm ở [Che779-Linux](https://github.com/Kidtomboy/Che779-Linux).
 
 [![Phiên bản](https://img.shields.io/github/v/release/Kidtomboy/Che779-EmulatorV2?label=phi%C3%AAn%20b%E1%BA%A3n&color=blue)](../../releases/latest)
 [![Lượt tải](https://img.shields.io/github/downloads/Kidtomboy/Che779-EmulatorV2/total?label=l%C6%B0%E1%BB%A3t%20t%E1%BA%A3i&color=brightgreen)](../../releases)
@@ -48,7 +48,7 @@ Che779 gồm 4 dự án, mỗi dự án một repo. Bạn đang xem **Project 2*
 |:-:|---|---|---|
 | 1 | [**Che779-Emulator**](https://github.com/Kidtomboy/Che779-Emulator) | Windows | Mỗi tab một cửa sổ, điều khiển bằng Remoter |
 | 2 | **Che779-EmulatorV2** ← *bạn đang ở đây* | Windows / Java 8+ | Nhiều tab trong một cửa sổ, một tiến trình |
-| 3 | [**Che779-Linux**](https://github.com/Kidtomboy/Che779-Linux) | Linux | Gói `.deb` / `.tar.gz` cho Linux, gồm V1 + V2 + Remoter Linux |
+| 3 | [**Che779-Linux**](https://github.com/Kidtomboy/Che779-Linux) | Linux + Termux | Gói `.deb` / `.tar.gz` cho Linux, gồm V1 + V2 + Remoter Linux; script Termux (Android) |
 | 4 | [**Che779-Android**](https://github.com/Kidtomboy/Che779-Android) | Android | Chạy trực tiếp trên điện thoại bằng APK |
 
 **V1 hay V2?** Project 1 cho mỗi game một tiến trình riêng nên cách ly tốt nhưng tốn RAM. V2 gom các tab vào một tiến trình nên nhẹ hơn và mở là dùng; đổi lại một lỗi nặng ở tầng Java có thể ảnh hưởng cả cửa sổ.
