@@ -7,7 +7,7 @@
 Dựa trên MicroEmulator 3.0.0, thêm lớp Che779: tab, lưới, proxy theo tab, đồng bộ thao tác và dọn RAM.
 Mở lên là dùng trên Windows.
 
-> **Nền tảng: Windows.** Quy ước 4 repo: **P1 và P2 = Windows · P3 = Linux (kèm Termux) · P4 = Android**. Bản Linux (gói `.deb`/`.tar.gz`, gồm V2) nằm ở [Che779-Linux](https://github.com/Kidtomboy/Che779-Linux).
+> **Nền tảng: Windows.** Quy ước 4 repo: **P1 và P2 = Windows · P3 = Linux + Termux · P4 = Android**. Bản Linux (gói `.deb`/`.tar.gz`, gồm V2) và Termux nằm ở [Che779-Linux](https://github.com/Kidtomboy/Che779-Linux).
 
 [![Phiên bản](https://img.shields.io/github/v/release/Kidtomboy/Che779-EmulatorV2?label=phi%C3%AAn%20b%E1%BA%A3n&color=blue)](../../releases/latest)
 [![Lượt tải](https://img.shields.io/github/downloads/Kidtomboy/Che779-EmulatorV2/total?label=l%C6%B0%E1%BB%A3t%20t%E1%BA%A3i&color=brightgreen)](../../releases)
